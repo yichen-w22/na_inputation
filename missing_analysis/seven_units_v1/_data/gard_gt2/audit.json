@@ -1,0 +1,307 @@
+{
+  "sources": [
+    {
+      "sensor": "GARD_12EKG60FF0010000XQ01",
+      "rows": 22585637,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 22585636,
+      "first_ns": 1717200480142000000,
+      "last_ns": 1746057599405000000,
+      "unclosed_last_valid_ns": 1746057599405000000
+    },
+    {
+      "sensor": "GARD_12MBP0100000BT09XQ01",
+      "rows": 22563479,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 22563478,
+      "first_ns": 1717200264572000000,
+      "last_ns": 1746057599405000000,
+      "unclosed_last_valid_ns": 1746057599405000000
+    },
+    {
+      "sensor": "GARD_12MBP0100000BP21XQ01",
+      "rows": 22470414,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 22470413,
+      "first_ns": 1717200504956000000,
+      "last_ns": 1746057599731000000,
+      "unclosed_last_valid_ns": 1746057599731000000
+    },
+    {
+      "sensor": "GARD_12MBL3100000BT01XQ01",
+      "rows": 22433517,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 22433516,
+      "first_ns": 1717200261649000000,
+      "last_ns": 1746057599405000000,
+      "unclosed_last_valid_ns": 1746057599405000000
+    },
+    {
+      "sensor": "GARD_12MBL3100000BM01XQ01",
+      "rows": 22513394,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 22513393,
+      "first_ns": 1717200201637000000,
+      "last_ns": 1746057599405000000,
+      "unclosed_last_valid_ns": 1746057599405000000
+    },
+    {
+      "sensor": "GARD_12MBL3100000BT02XQ01",
+      "rows": 22571274,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 22571273,
+      "first_ns": 1717200261649000000,
+      "last_ns": 1746057599405000000,
+      "unclosed_last_valid_ns": 1746057599405000000
+    },
+    {
+      "sensor": "GARD_12MBA11WP001BT04XQ01",
+      "rows": 22586103,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 22586102,
+      "first_ns": 1717200021592000000,
+      "last_ns": 1746057599405000000,
+      "unclosed_last_valid_ns": 1746057599405000000
+    },
+    {
+      "sensor": "GARD_12MBA11WP001BP01XQ01",
+      "rows": 22487377,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 22487376,
+      "first_ns": 1717200081950000000,
+      "last_ns": 1746057599405000000,
+      "unclosed_last_valid_ns": 1746057599405000000
+    },
+    {
+      "sensor": "GARD_12MBA11WP011BT03XQ01",
+      "rows": 22568503,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 22568502,
+      "first_ns": 1717200084016000000,
+      "last_ns": 1746057599405000000,
+      "unclosed_last_valid_ns": 1746057599405000000
+    },
+    {
+      "sensor": "GARD_12MBA11WP011BP13XQ01",
+      "rows": 22603691,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 22603690,
+      "first_ns": 1717200324330000000,
+      "last_ns": 1746057599405000000,
+      "unclosed_last_valid_ns": 1746057599405000000
+    },
+    {
+      "sensor": "GARD_12CJP01QA001BJ02XQ01",
+      "rows": 27617907,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 27617906,
+      "first_ns": 1717200000284000000,
+      "last_ns": 1746057599521000000,
+      "unclosed_last_valid_ns": 1746057599521000000
+    },
+    {
+      "sensor": "GARD_12MBY01KH0010000GT01",
+      "rows": 22577720,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 22577719,
+      "first_ns": 1717200502863000000,
+      "last_ns": 1746057599405000000,
+      "unclosed_last_valid_ns": 1746057599405000000
+    },
+    {
+      "sensor": "GARD_12MBY10CS9010000XQ11",
+      "rows": 22553697,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 22553696,
+      "first_ns": 1717200064418000000,
+      "last_ns": 1746057599211000000,
+      "unclosed_last_valid_ns": 1746057599211000000
+    },
+    {
+      "sensor": "GARD_12HAN01EM002BT01XQ01",
+      "rows": 23943336,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 23943335,
+      "first_ns": 1717200004286000000,
+      "last_ns": 1746057599521000000,
+      "unclosed_last_valid_ns": 1746057599521000000
+    },
+    {
+      "sensor": "GARD_12HAN01EM002BT02XQ01",
+      "rows": 23946470,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 23946469,
+      "first_ns": 1717200004286000000,
+      "last_ns": 1746057599521000000,
+      "unclosed_last_valid_ns": 1746057599521000000
+    },
+    {
+      "sensor": "GARD_12HAN01EM002BT03XQ01",
+      "rows": 23796498,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 23796497,
+      "first_ns": 1717200004286000000,
+      "last_ns": 1746057599521000000,
+      "unclosed_last_valid_ns": 1746057599521000000
+    },
+    {
+      "sensor": "GARD_12HAN01EM002BT04XQ01",
+      "rows": 23938342,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 23938341,
+      "first_ns": 1717200004286000000,
+      "last_ns": 1746057599521000000,
+      "unclosed_last_valid_ns": 1746057599521000000
+    },
+    {
+      "sensor": "GARD_12HAN01EM002BT05XQ01",
+      "rows": 23945918,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 23945917,
+      "first_ns": 1717200004286000000,
+      "last_ns": 1746057599521000000,
+      "unclosed_last_valid_ns": 1746057599521000000
+    },
+    {
+      "sensor": "GARD_12HAN01EM002BT06XQ01",
+      "rows": 23861052,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 23861051,
+      "first_ns": 1717200004286000000,
+      "last_ns": 1746057599521000000,
+      "unclosed_last_valid_ns": 1746057599521000000
+    },
+    {
+      "sensor": "GARD_12HAN01EM002BP01XQ01",
+      "rows": 27363848,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 27363847,
+      "first_ns": 1717200000284000000,
+      "last_ns": 1746057599521000000,
+      "unclosed_last_valid_ns": 1746057599521000000
+    },
+    {
+      "sensor": "GARD_12HAN01EM002BP03XQ01",
+      "rows": 23856444,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 23856443,
+      "first_ns": 1717200004286000000,
+      "last_ns": 1746057599521000000,
+      "unclosed_last_valid_ns": 1746057599521000000
+    },
+    {
+      "sensor": "GARD_12HAN01EM002BP04XQ01",
+      "rows": 25658900,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 25658899,
+      "first_ns": 1717200000284000000,
+      "last_ns": 1746057599521000000,
+      "unclosed_last_valid_ns": 1746057599521000000
+    },
+    {
+      "sensor": "GARD_12MBA2100000BT98XQ01",
+      "rows": 22599356,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 22599355,
+      "first_ns": 1717200261649000000,
+      "last_ns": 1746057599405000000,
+      "unclosed_last_valid_ns": 1746057599405000000
+    },
+    {
+      "sensor": "GARD_12MKA01FE0010000XQ01",
+      "rows": 22579667,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 22579666,
+      "first_ns": 1717200092267000000,
+      "last_ns": 1746057599405000000,
+      "unclosed_last_valid_ns": 1746057599405000000
+    },
+    {
+      "sensor": "GARD_12MBM01EM001BP01XQ01",
+      "rows": 22627516,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 22627515,
+      "first_ns": 1717200321663000000,
+      "last_ns": 1746057599405000000,
+      "unclosed_last_valid_ns": 1746057599405000000
+    },
+    {
+      "sensor": "GARD_10SPF0400000BT01XQ01",
+      "rows": 22487106,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 22487105,
+      "first_ns": 1717200244942000000,
+      "last_ns": 1746057599405000000,
+      "unclosed_last_valid_ns": 1746057599405000000
+    },
+    {
+      "sensor": "GARD_10SPF3500000BT01XQ01",
+      "rows": 22480992,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 22480991,
+      "first_ns": 1717200568867000000,
+      "last_ns": 1746057599405000000,
+      "unclosed_last_valid_ns": 1746057599405000000
+    },
+    {
+      "sensor": "GARD_10SPF3400000BT01XQ01",
+      "rows": 22566088,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 22566087,
+      "first_ns": 1717200568865000000,
+      "last_ns": 1746057599405000000,
+      "unclosed_last_valid_ns": 1746057599405000000
+    },
+    {
+      "sensor": "GARD_10SPF300000BT01XQ010",
+      "rows": 22561297,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 22561296,
+      "first_ns": 1717200568864000000,
+      "last_ns": 1746057599405000000,
+      "unclosed_last_valid_ns": 1746057599405000000
+    },
+    {
+      "sensor": "GARD_10SPF3100000BT01XQ01",
+      "rows": 22569858,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 22569857,
+      "first_ns": 1717200568870000000,
+      "last_ns": 1746057599405000000,
+      "unclosed_last_valid_ns": 1746057599405000000
+    }
+  ],
+  "rows": 698915401,
+  "positive_intervals": 698915371,
+  "source_metadata_unchanged": true
+}

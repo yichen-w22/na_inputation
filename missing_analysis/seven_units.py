@@ -82,6 +82,22 @@ def check_sources(inventory):
     assert core.digest(Path(w['path'])) == inventory['workbook_sha256']
 
 
+def history_inventory_matches(inventory):
+    path=HISTORY/'sources.json'
+    return path.exists() and core.read_json(path)==inventory
+
+
+def history_models_ready(cache):
+    audit=cache/'audit.json'
+    if not audit.exists() or core.read_json(audit).get('reused_from')!=str(HISTORY):
+        return False
+    required=['baseline.npz','daily_labels.csv','initializations.json','class_stability.csv',
+              'block_stability.csv','initialization_ari.csv','evaluation.json']
+    required += [f'perturbation_{rep:02d}{suffix}' for rep in range(20)
+                 for suffix in ['.json','_checks.npz']]
+    return all((HISTORY/f'k{k}'/name).exists() for k in PROTOCOL['k_values'] for name in required)
+
+
 def inventory_run(out):
     out.mkdir(parents=True, exist_ok=True)
     path = out/'_data'/'manifest.json'
@@ -134,8 +150,7 @@ def prepare_unit(out, unit, inventory):
         print(f'{unit}: prepared cache verified', flush=True)
         return
     # Reuse JQRD GT1 only when the complete source inventory is identical.
-    if unit == 'jqrd_gt1' and (HISTORY/'sources.json').exists():
-        assert core.read_json(HISTORY/'sources.json') == inventory
+    if unit == 'jqrd_gt1' and history_inventory_matches(inventory):
         f = pd.read_csv(HISTORY/'daily_metadata.csv')
         z = dict(np.load(HISTORY/'daily_profiles.npz'))
         core.csv(c/'daily.csv', f)
@@ -277,7 +292,7 @@ def evaluate_unit(out,unit):
     p=np.load(c/'daily.npz')['probabilities']
     model_path=c/'models.npz'
     summary_path=c/'analysis.json'
-    if unit=='jqrd_gt1' and not summary_path.exists():
+    if unit=='jqrd_gt1' and not summary_path.exists() and history_models_ready(c):
         models,summaries=import_history(unit,f,p)
         save_npz(model_path,models)
         core.save_json(summary_path,dict(k_results=summaries))
@@ -542,7 +557,7 @@ def summarize(out):
             title+=f'；人工确认K={summary["confirmed_k"]}'
         body=[f'<section><h2>{html.escape(title)}</h2>',
               f'<p>{summary["start"]} 至 {summary["end"]}；学习日分布 {summary["learning_days"]:,}；可分类日 {summary["assigned_days"]:,}。</p>',
-              '<table><tr><th>K</th><th>轮廓系数</th><th>日期扰动ARI</th><th>全部门槛</th><th>查看三张图</th></tr>']
+              '<table><tr><th>K</th><th>轮廓系数</th><th>日期扰动ARI<br>中位数 / 10%分位</th><th>全部门槛</th><th>查看三张图</th></tr>']
         text.append(title)
         text.append(f'  完整来源行数 {audit["rows"]:,}；日期 {summary["start"]} 至 {summary["end"]}；学习日 {summary["learning_days"]}。')
         text.append('  日期状态：'+json.dumps(summary['status_counts'],ensure_ascii=False))
@@ -555,10 +570,16 @@ def summarize(out):
             rows.append(row)
             links=' · '.join(f'<a target="_blank" href="{unit}/k{k}/{file}">{name}</a>' for file,name in
                 [('class_timeline.svg','时间条带'),('representative_distributions.svg','代表分布'),('transition_matrices.svg','转移矩阵')])
-            body.append(f'<tr><td>{k}</td><td>{s["silhouette_mean"]:.4f}</td><td>{s["block_ari_median"]:.4f}</td>'
-                        f'<td>{"通过" if s["passes"] else "未通过"}</td><td>{links}</td></tr>')
+            gate_names=dict(init_ari='初始化稳定性',block_ari='日期扰动中位数',
+                            block_ari_p10='日期扰动10%分位',class_jaccard='逐类一致性',silhouette='轮廓系数')
+            failed='、'.join(gate_names[key] for key,passed in s['gates'].items() if not passed)
+            verdict='通过' if s['passes'] else '未通过：'+failed
+            body.append(f'<tr><td>{k}</td><td>{s["silhouette_mean"]:.4f}</td><td>{s["block_ari_median"]:.4f} / {s["block_ari_p10"]:.4f}</td>'
+                        f'<td>{verdict}</td><td>{links}</td></tr>')
             text.append(f'  K={k}: silhouette={s["silhouette_mean"]:.4f}, date ARI={s["block_ari_median"]:.4f}, '
                         f'p10={s["block_ari_p10"]:.4f}, all_gates={s["passes"]}。')
+            if failed:
+                text.append('    未通过：'+failed)
         five=summary['k_results']['5']
         models=np.load(c/'models.npz')
         count=models['k5_all_transitions']
@@ -645,13 +666,32 @@ def verify_outputs(out):
 
 def bundle_code(out):
     files=[Path(__file__),Path(core.__file__),HERE/'test_seven_units.py',HERE/'jqrd_gt1'/'test_daily_modes.py']
-    with zipfile.ZipFile(out/'_data'/'reproducibility.zip','w',zipfile.ZIP_DEFLATED) as z:
+    archive=out/'_data'/'reproducibility.zip'
+    history={}
+    original_hash=None
+    if archive.exists():
+        with zipfile.ZipFile(archive) as z:
+            history={name:z.read(name) for name in z.namelist() if name.startswith('executed/')}
+            entry=str(Path(__file__).relative_to(ROOT)).replace('\\','/')
+            if entry in z.namelist():
+                old=z.read(entry)
+                original_hash=hashlib.sha256(old).hexdigest()
+                if old!=Path(__file__).read_bytes():
+                    history[f'executed/seven_units_{original_hash[:12]}.py']=old
+    versions_path=out/'_data'/'code_versions.json'
+    previous=core.read_json(versions_path) if versions_path.exists() else {}
+    fitting_hash=previous.get('executed_fitting_entry_sha256',original_hash or core.digest(Path(__file__)))
+    with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED) as z:
+        for name,content in history.items():
+            z.writestr(name,content)
         for p in files:
             if p.exists():
                 z.write(p,str(p.relative_to(ROOT)))
         manifest=core.read_json(out/'_data'/'manifest.json')
         z.writestr('requirements.txt','\n'.join(k+'=='+v for k,v in manifest['dependencies'].items())+'\n')
-    core.save_json(out/'_data'/'code_versions.json',{str(p.relative_to(ROOT)):core.digest(p) for p in files if p.exists()})
+    versions={str(p.relative_to(ROOT)):core.digest(p) for p in files if p.exists()}
+    versions['executed_fitting_entry_sha256']=fitting_hash
+    core.save_json(versions_path,versions)
 
 
 def main():

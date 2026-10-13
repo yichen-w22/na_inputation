@@ -1,6 +1,9 @@
 """Reuse the seven core protocol tests and test multi-unit generalization."""
 import sys
 import unittest
+from unittest.mock import patch
+import tempfile
+from pathlib import Path
 import numpy as np
 import pandas as pd
 import seven_units as m
@@ -10,6 +13,22 @@ from jqrd_gt1.test_daily_modes import ProtocolTests
 
 
 class MultiUnitTests(unittest.TestCase):
+    def test_missing_or_changed_history_falls_back_to_full_scan(self):
+        with tempfile.TemporaryDirectory() as td, patch.object(m,'HISTORY',Path(td)/'history'):
+            inventory={'test':'source-v1'}
+            self.assertFalse(m.history_inventory_matches(inventory))
+            m.core.save_json(m.HISTORY/'sources.json',inventory)
+            self.assertTrue(m.history_inventory_matches(inventory))
+            self.assertFalse(m.history_inventory_matches({'test':'source-v2'}))
+
+    def test_incomplete_model_history_falls_back_to_refitting(self):
+        with tempfile.TemporaryDirectory() as td, patch.object(m,'HISTORY',Path(td)/'history'):
+            cache=Path(td)/'cache'
+            cache.mkdir()
+            self.assertFalse(m.history_models_ready(cache))
+            m.core.save_json(cache/'audit.json',{'reused_from':str(m.HISTORY)})
+            self.assertFalse(m.history_models_ready(cache))
+
     def test_selected_sensor_scope_and_order(self):
         for unit in m.UNITS:
             points,_=m.points(unit)

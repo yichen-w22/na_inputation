@@ -1,0 +1,237 @@
+{
+  "sources": [
+    {
+      "sensor": "JXRD_21EKG60FF001__XQ01",
+      "rows": 9398643,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 9398642,
+      "first_ns": 1717200057141000000,
+      "last_ns": 1746057594878000000,
+      "unclosed_last_valid_ns": 1746057594878000000
+    },
+    {
+      "sensor": "JXRD_14MBP01WP004BT09XQ01",
+      "rows": 7975304,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 7975303,
+      "first_ns": 1717200190050000000,
+      "last_ns": 1746057479775000000,
+      "unclosed_last_valid_ns": 1746057479775000000
+    },
+    {
+      "sensor": "JXRD_14MBP01WP004BP01XQ01",
+      "rows": 7936335,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 7936334,
+      "first_ns": 1717200069340000000,
+      "last_ns": 1746057585469000000,
+      "unclosed_last_valid_ns": 1746057585469000000
+    },
+    {
+      "sensor": "JXRD_14MBL3100000BT01XQ01",
+      "rows": 7883080,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 7883079,
+      "first_ns": 1717200537757000000,
+      "last_ns": 1746057483476000000,
+      "unclosed_last_valid_ns": 1746057483476000000
+    },
+    {
+      "sensor": "JXRD_14MBL3100000BM01XQ01",
+      "rows": 7963883,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 7963882,
+      "first_ns": 1717200450156000000,
+      "last_ns": 1746057584679000000,
+      "unclosed_last_valid_ns": 1746057584679000000
+    },
+    {
+      "sensor": "JXRD_14MBL3100000BT02XQ01",
+      "rows": 8014750,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 8014749,
+      "first_ns": 1717200015048000000,
+      "last_ns": 1746057539980000000,
+      "unclosed_last_valid_ns": 1746057539980000000
+    },
+    {
+      "sensor": "JXRD_14MBA1100000BT04XQ01",
+      "rows": 7906622,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 7906621,
+      "first_ns": 1717200317345000000,
+      "last_ns": 1746057495468000000,
+      "unclosed_last_valid_ns": 1746057495468000000
+    },
+    {
+      "sensor": "JXRD_14MBA1100000BP01XQ01",
+      "rows": 8076992,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 8076991,
+      "first_ns": 1717200169842000000,
+      "last_ns": 1746057480473000000,
+      "unclosed_last_valid_ns": 1746057480473000000
+    },
+    {
+      "sensor": "JXRD_14MBA1100000BT13XQ01",
+      "rows": 7935509,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 7935508,
+      "first_ns": 1717200186147000000,
+      "last_ns": 1746057583878000000,
+      "unclosed_last_valid_ns": 1746057583878000000
+    },
+    {
+      "sensor": "JXRD_14MBA1100000BP03XQ01",
+      "rows": 8339602,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 8339601,
+      "first_ns": 1717200109534000000,
+      "last_ns": 1746057592868000000,
+      "unclosed_last_valid_ns": 1746057592868000000
+    },
+    {
+      "sensor": "JXRD_14MBY0100000BJ01XQ01",
+      "rows": 13134353,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 13134352,
+      "first_ns": 1717200002036000000,
+      "last_ns": 1746057594572000000,
+      "unclosed_last_valid_ns": 1746057594572000000
+    },
+    {
+      "sensor": "JXRD_14MBY01KH0010000GT01",
+      "rows": 8311833,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 8311832,
+      "first_ns": 1717200299242000000,
+      "last_ns": 1746057590172000000,
+      "unclosed_last_valid_ns": 1746057590172000000
+    },
+    {
+      "sensor": "JXRD_21MBY10CS901__ZQ11",
+      "rows": 39456905,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 39456904,
+      "first_ns": 1717200001132000000,
+      "last_ns": 1746057599869000000,
+      "unclosed_last_valid_ns": 1746057599869000000
+    },
+    {
+      "sensor": "JXRD_14RAA01WP401BT01XQ01",
+      "rows": 7985374,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 7985373,
+      "first_ns": 1717200226098000000,
+      "last_ns": 1746057013969000000,
+      "unclosed_last_valid_ns": 1746057013969000000
+    },
+    {
+      "sensor": "JXRD_14RAA01WP401BT02XQ01",
+      "rows": 8001204,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 8001203,
+      "first_ns": 1717200302471000000,
+      "last_ns": 1746057589189000000,
+      "unclosed_last_valid_ns": 1746057589189000000
+    },
+    {
+      "sensor": "JXRD_14RAA01WP401BP01XQ01",
+      "rows": 20928821,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 20928820,
+      "first_ns": 1717200002786000000,
+      "last_ns": 1746057598781000000,
+      "unclosed_last_valid_ns": 1746057598781000000
+    },
+    {
+      "sensor": "JXRD_14MBA2100000BT98XQ01",
+      "rows": 8086170,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 8086169,
+      "first_ns": 1717200263544000000,
+      "last_ns": 1746057529270000000,
+      "unclosed_last_valid_ns": 1746057529270000000
+    },
+    {
+      "sensor": "JXRD_21MKA01FE001__ZQ01",
+      "rows": 8088643,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 8088642,
+      "first_ns": 1717200234848000000,
+      "last_ns": 1746057588579000000,
+      "unclosed_last_valid_ns": 1746057588579000000
+    },
+    {
+      "sensor": "JXRD_21MBM10CP101_484567_O_OUT",
+      "rows": 8532144,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 8532143,
+      "first_ns": 1717200007413000000,
+      "last_ns": 1746057591649000000,
+      "unclosed_last_valid_ns": 1746057591649000000
+    },
+    {
+      "sensor": "JXRD_00EKG10WP001BQ06XQ08",
+      "rows": 2232720,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 2232719,
+      "first_ns": 1717200187774000000,
+      "last_ns": 1746057289900000000,
+      "unclosed_last_valid_ns": 1746057289900000000
+    },
+    {
+      "sensor": "JXRD_00EKG10WP001BQ16XQ08",
+      "rows": 2259189,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 2259188,
+      "first_ns": 1717200191793000000,
+      "last_ns": 1746057289900000000,
+      "unclosed_last_valid_ns": 1746057289900000000
+    },
+    {
+      "sensor": "JXRD_00EKG10WP001BQ14XQ08",
+      "rows": 2293548,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 2293547,
+      "first_ns": 1717200187777000000,
+      "last_ns": 1746057289900000000,
+      "unclosed_last_valid_ns": 1746057289900000000
+    },
+    {
+      "sensor": "JXRD_00EKG10WP001BQ15XQ08",
+      "rows": 2304997,
+      "invalid_values": 0,
+      "duplicate_valid_timestamps": 0,
+      "positive_intervals": 2304996,
+      "first_ns": 1717200167692000000,
+      "last_ns": 1746057251621000000,
+      "unclosed_last_valid_ns": 1746057251621000000
+    }
+  ],
+  "rows": 213046621,
+  "positive_intervals": 213046598,
+  "source_metadata_unchanged": true
+}
