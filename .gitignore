@@ -1,0 +1,12 @@
+raw_data/
+experiment_data/
+experiments/.venv/
+experiments/.venv_tsfm/
+experiments/foundation_assets/
+experiments/runs/*/adapter_cache/
+experiments/cache/
+experiments/runs/*/predictions/
+experiments/runs/*/checkpoints/
+experiments/vendor/
+__pycache__/
+.pytest_cache/

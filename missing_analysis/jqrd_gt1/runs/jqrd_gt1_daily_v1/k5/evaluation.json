@@ -1,0 +1,21 @@
+{
+  "k": 5,
+  "best_initialization": 0,
+  "silhouette_mean": 0.3954818308678529,
+  "mean_hellinger": 0.321243281468007,
+  "init_ari_median": 1.0,
+  "init_ari_p10": 1.0,
+  "block_ari_median": 0.9826608344532513,
+  "block_ari_p10": 0.9482315237126782,
+  "min_class_jaccard_median": 0.9740942299090503,
+  "unstable_days": 96,
+  "insufficient_evidence_days": 933,
+  "passes": true,
+  "gates": {
+    "init_ari": true,
+    "block_ari": true,
+    "block_ari_p10": true,
+    "class_jaccard": true,
+    "silhouette": true
+  }
+}

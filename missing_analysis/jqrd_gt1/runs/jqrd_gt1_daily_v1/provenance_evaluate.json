@@ -1,0 +1,20 @@
+{
+  "code_sha256": "8ac8f8f13289cca00f3f5903b446f04a0d6dd8887a1c4937100845a1b61b3b14",
+  "versions": {
+    "numpy": "2.3.5",
+    "pandas": "2.3.3",
+    "scipy": "1.16.3",
+    "scikit-learn": "1.7.2",
+    "kmedoids": "0.5.5",
+    "matplotlib": "3.10.6",
+    "openpyxl": "3.1.5"
+  },
+  "python": "3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:09:58) [MSC v.1929 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "command": [
+    "missing_analysis/daily_modes.py",
+    "evaluate"
+  ],
+  "utc_time": "2026-10-13T14:22:22.386982+00:00",
+  "config_sha256": "9052eeb1ed2bc522770b6b100710d31e8d22a9f5d6e46a4b40b0bade1d881752"
+}

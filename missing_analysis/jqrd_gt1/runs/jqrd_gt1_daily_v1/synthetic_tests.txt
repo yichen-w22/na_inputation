@@ -1,0 +1,12 @@
+test_bin_boundaries (test_daily_modes.ProtocolTests.test_bin_boundaries) ... ok
+test_date_split_alignment_and_ari (test_daily_modes.ProtocolTests.test_date_split_alignment_and_ari) ... ok
+test_hellinger (test_daily_modes.ProtocolTests.test_hellinger) ... ok
+test_stream_day_chunk_duplicates_invalid_and_censoring (test_daily_modes.ProtocolTests.test_stream_day_chunk_duplicates_invalid_and_censoring) ... ok
+test_temporal_no_bridging_and_censoring (test_daily_modes.ProtocolTests.test_temporal_no_bridging_and_censoring) ... ok
+test_timezone_and_subsecond (test_daily_modes.ProtocolTests.test_timezone_and_subsecond) ... ok
+test_true_medoids_exhaustive_optimum_and_seed (test_daily_modes.ProtocolTests.test_true_medoids_exhaustive_optimum_and_seed) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.241s
+
+OK

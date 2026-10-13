@@ -1,0 +1,3 @@
+﻿sample_id,sensor,name,semantic,sensor_order,date,day_index,status,boundary,valid_observations,completed_intervals,longest_interval_seconds,long_gap_overlap_seconds,unfinished_intervals,assignable,train_eligible,underflow_probability,overflow_probability,cluster,check_count,agreement_fraction,stability,nearest_distance,second_cluster,distance_margin
+4044,JQRD_11MBY10CS901ZQ11,燃机转速,turbine_speed,12,2024-07-07,36,eligible,False,12047,12047,791.624,0.0,0,True,True,0.0,0.0,2.0,4,0.25,unstable,0.8227861586283317,1.0,0.0016942396487247
+4046,JQRD_11MBY10CS901ZQ11,燃机转速,turbine_speed,12,2024-07-09,38,eligible,False,11701,11701,614.918,0.0,0,True,True,0.0,0.0,2.0,4,0.25,unstable,0.8202788465813886,1.0,0.0021700322771835

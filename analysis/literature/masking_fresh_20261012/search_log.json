@@ -1,0 +1,165 @@
+{
+  "date": "2026-10-12",
+  "timezone": "Asia/Shanghai",
+  "scope": "Fresh external method research following explicit rejection of project methods; no prior project methods or performance used for selection.",
+  "question": "Learn observation/missingness patterns, temporal and cross-variable structure and conditional value/context associations from poor data, then sample masks over good reference data.",
+  "sources": [
+    "primary papers via arXiv/PMLR/PLOS/PMC/NeurIPS/Nature",
+    "author GitHub repositories and official software documentation"
+  ],
+  "inclusion": [
+    "models that explicitly learn masks or observation times",
+    "missingness simulators with configurable mechanisms for controls",
+    "identifiability and temporal duration references"
+  ],
+  "exclusion": [
+    "imputation-only models without learning/generating missingness",
+    "synthetic value generators with no explicit mask model",
+    "unverified search mirrors as scientific support"
+  ],
+  "queries": [
+    {
+      "family": "mask_learning",
+      "q": "learn missingness patterns generate masks multivariate time series realistic missing data simulation",
+      "provider": "search_service_web_run",
+      "date": "2026-10-12",
+      "total_engine_hits": "not exposed by provider"
+    },
+    {
+      "family": "mask_learning",
+      "q": "data driven missingness generator time series mask generative model",
+      "provider": "search_service_web_run",
+      "date": "2026-10-12",
+      "total_engine_hits": "not exposed by provider"
+    },
+    {
+      "family": "generative_masks",
+      "q": "MisGAN learning missingness mask generator missing data",
+      "provider": "search_service_web_run",
+      "date": "2026-10-12",
+      "total_engine_hits": "not exposed by provider"
+    },
+    {
+      "family": "observation_process",
+      "q": "time series informative observation process neural point process sampling missingness",
+      "provider": "search_service_web_run",
+      "date": "2026-10-12",
+      "total_engine_hits": "not exposed by provider"
+    },
+    {
+      "family": "duration",
+      "q": "simulate realistic missingness time series semi Markov duration",
+      "provider": "search_service_web_run",
+      "date": "2026-10-12",
+      "total_engine_hits": "not exposed by provider"
+    },
+    {
+      "family": "industrial",
+      "q": "industrial sensor time series missing data mechanism simulation value dependent sampling compression",
+      "provider": "search_service_web_run",
+      "date": "2026-10-12",
+      "total_engine_hits": "not exposed by provider"
+    },
+    {
+      "family": "conditional",
+      "q": "learn generate missingness masks time series HealthGen VAE observation process",
+      "provider": "search_service_web_run",
+      "date": "2026-10-12",
+      "total_engine_hits": "not exposed by provider"
+    },
+    {
+      "family": "conditional",
+      "q": "\"missingness\" \"mask generation\" \"time series\"",
+      "provider": "search_service_web_run",
+      "date": "2026-10-12",
+      "total_engine_hits": "not exposed by provider"
+    },
+    {
+      "family": "identifiability",
+      "q": "\"missingness\" \"not at random\" \"identifiability\" generative models",
+      "provider": "search_service_web_run",
+      "date": "2026-10-12",
+      "total_engine_hits": "not exposed by provider"
+    },
+    {
+      "family": "tool",
+      "q": "\"tsgap\" \"github.com/feruzoripov\"",
+      "provider": "search_service_web_run",
+      "date": "2026-10-12",
+      "total_engine_hits": "not exposed by provider"
+    },
+    {
+      "family": "code",
+      "q": "\"Latent variable model for high-dimensional point process\" github",
+      "provider": "search_service_web_run",
+      "date": "2026-10-12",
+      "total_engine_hits": "not exposed by provider"
+    },
+    {
+      "family": "code",
+      "q": "\"Preserving Missing Data Distribution in Synthetic Data\" github",
+      "provider": "search_service_web_run",
+      "date": "2026-10-12",
+      "total_engine_hits": "not exposed by provider"
+    },
+    {
+      "family": "conditional",
+      "q": "learn missingness mechanism time series conditional mask generator covariates",
+      "provider": "search_service_web_run",
+      "date": "2026-10-12",
+      "total_engine_hits": "not exposed by provider"
+    },
+    {
+      "family": "identity",
+      "q": "\"Latent variable model\" \"Sinelnikov\" \"arxiv\"",
+      "provider": "search_service_web_run",
+      "date": "2026-10-12",
+      "total_engine_hits": "not exposed by provider"
+    },
+    {
+      "family": "code",
+      "q": "\"Sinelnikov\" \"LPPP\" github",
+      "provider": "search_service_web_run",
+      "date": "2026-10-12",
+      "total_engine_hits": "not exposed by provider"
+    },
+    {
+      "family": "gap",
+      "q": "\"time series\" \"missingness patterns\" \"generator\" \"mask\" diffusion",
+      "provider": "search_service_web_run",
+      "date": "2026-10-12",
+      "total_engine_hits": "not exposed by provider"
+    },
+    {
+      "family": "gap",
+      "q": "\"time series\" \"missingness\" \"simulation\" \"learn\" masks conditional",
+      "provider": "search_service_web_run",
+      "date": "2026-10-12",
+      "total_engine_hits": "not exposed by provider"
+    },
+    {
+      "family": "gap",
+      "q": "\"conditional\" \"mask generator\" \"missing data\" time series",
+      "provider": "search_service_web_run",
+      "date": "2026-10-12",
+      "total_engine_hits": "not exposed by provider"
+    },
+    {
+      "family": "gap",
+      "q": "\"missingness\" \"mask\" \"autoregressive\" \"generation\"",
+      "provider": "search_service_web_run",
+      "date": "2026-10-12",
+      "total_engine_hits": "not exposed by provider"
+    }
+  ],
+  "returned_hit_count_note": "Search output snapshots preserve returned entries, not engine-wide counts; duplicates not independent sources.",
+  "coverage": "Targeted systematic search across query families, not an exhaustive systematic review.",
+  "evidence_file": "web_evidence.json",
+  "gaps": [
+    "Real industrial data fidelity and transfer untested",
+    "MNAR cannot be certified from timestamps/value alone",
+    "No verified plug-and-play conditional mask generator for this exact cross-unit task",
+    "MPP-VAE runtime, license grant and adaptation API not yet verified",
+    "Preserving-missingness paper accessible through web connector; direct requests access failed"
+  ]
+}

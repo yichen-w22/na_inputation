@@ -1,0 +1,12 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>七台燃机记录间隔分析</title>
+<style>body{font:16px/1.7 "Microsoft YaHei",sans-serif;max-width:1180px;margin:40px auto;padding:0 24px;background:#f6f8fa;color:#152536}h1{font-size:29px}h2{font-size:21px}section{background:white;padding:18px 24px;margin:24px 0;border-radius:10px}table{border-collapse:collapse;width:100%}th,td{padding:9px 12px;border-bottom:1px solid #ddd;text-align:left}a{color:#126bb5}p{color:#475569}</style>
+<h1>七台燃机每日记录间隔分析</h1><p>每行提供三张SVG。按机组分别聚类，跨机组的同色类别不能直接等同；蓝色也不自动代表高质量真值。图中参数顺序沿用各自选取点表。</p>
+<p><a href="类别数比较.csv">下载类别数比较</a> · <a href="分析说明.txt">查看分析说明</a></p><section><h2>JQRD_GT1 — 23测点；规则推荐K=3；人工确认K=5</h2>
+<p>2024-06-01 至 2025-04-30；学习日分布 6,553；可分类日 6,599。</p>
+<table><tr><th>K</th><th>轮廓系数</th><th>日期扰动ARI</th><th>全部门槛</th><th>查看三张图</th></tr>
+<tr><td>2</td><td>0.3707</td><td>1.0000</td><td>通过</td><td><a target="_blank" href="jqrd_gt1/k2/class_timeline.svg">时间条带</a> · <a target="_blank" href="jqrd_gt1/k2/representative_distributions.svg">代表分布</a> · <a target="_blank" href="jqrd_gt1/k2/transition_matrices.svg">转移矩阵</a></td></tr>
+<tr><td>3</td><td>0.3817</td><td>0.9816</td><td>通过</td><td><a target="_blank" href="jqrd_gt1/k3/class_timeline.svg">时间条带</a> · <a target="_blank" href="jqrd_gt1/k3/representative_distributions.svg">代表分布</a> · <a target="_blank" href="jqrd_gt1/k3/transition_matrices.svg">转移矩阵</a></td></tr>
+<tr><td>4</td><td>0.3834</td><td>0.8714</td><td>未通过</td><td><a target="_blank" href="jqrd_gt1/k4/class_timeline.svg">时间条带</a> · <a target="_blank" href="jqrd_gt1/k4/representative_distributions.svg">代表分布</a> · <a target="_blank" href="jqrd_gt1/k4/transition_matrices.svg">转移矩阵</a></td></tr>
+<tr><td>5</td><td>0.3955</td><td>0.9827</td><td>通过</td><td><a target="_blank" href="jqrd_gt1/k5/class_timeline.svg">时间条带</a> · <a target="_blank" href="jqrd_gt1/k5/representative_distributions.svg">代表分布</a> · <a target="_blank" href="jqrd_gt1/k5/transition_matrices.svg">转移矩阵</a></td></tr>
+<tr><td>6</td><td>0.3835</td><td>0.9636</td><td>通过</td><td><a target="_blank" href="jqrd_gt1/k6/class_timeline.svg">时间条带</a> · <a target="_blank" href="jqrd_gt1/k6/representative_distributions.svg">代表分布</a> · <a target="_blank" href="jqrd_gt1/k6/transition_matrices.svg">转移矩阵</a></td></tr>
+</table><p>K=5自转移比例 91.82%；23/23测点高于各自打乱对照97.5%分位数。</p></section></html>
