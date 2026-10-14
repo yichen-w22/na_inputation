@@ -10,3 +10,6 @@ experiments/runs/*/checkpoints/
 experiments/vendor/
 __pycache__/
 .pytest_cache/
+
+# Reproducible Hellinger distance matrix caches (keep local)
+missing_analysis/**/hellinger*.npy

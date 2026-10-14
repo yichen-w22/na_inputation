@@ -108,6 +108,7 @@ V1 预设门控桥接相对线性宏 nRMSE 降低 4.69%，按日区间为 [3.12%
 - `figures/plot_sensor_interval_windows.py`：单测点全时段滑窗分布入口，支持DEFAULTS和命令行。当前用户确认默认window=2mo、step=2mo（自然月）、slices=0（全部窗口）；Matplotlib仅输出一张SVG，默认目录为 `figures/interval_scattering/`，文件名为 `<sensor>_interval_probability.svg`。图面保留测点编码与含义标题、曲线、坐标轴和日期图例，无解释及不足样本占位图例。PCHIP平滑展示保持箱中心概率，不作为连续密度或理论拟合；分箱外计入分母，不足样本窗口不绘制曲线。来源与计数内嵌SVG，覆盖须--overwrite。仅修改图面时可按内嵌统计重绘，区分统计脚本哈希与重绘脚本哈希。
 - `figures/fit_sensor_interval_mixtures.py`：当前固定点质量＋对数正态混合探索入口，依赖scikit-learn和threadpoolctl。每10个本地日的0/1日留出检查、2/3日选择连续成分数、4至9日拟合；点位置只由拟合日期的均匀抽样确定，阈值由max_atoms/min_atom_fraction/min_atom_samples控制，位置在后续分区冻结。点权重重新估计，剩余log间隔拟合连续混合；完整计数做分箱误差。图中两条曲线均按同一分箱积分概率PCHIP展示，不是密度，点质量仍保留于数学模型。原始CDF检查比较样本与模型的左右极限并覆盖所有模型原子；不报告IID p值。输出同名独立SVG，替换旧拟合图但不覆盖原始概率图，前版连续模型保存在SVG的previous_continuous_model字段。已打开留出结果用于发现需增加点质量，故后续比较为探索性诊断，不是新冻结测试。
 - 大数据使用流式/分块处理；大文件、权重、缓存与检查点不直接进入 Git 对象库。每个新产物记录来源、版本、时间、变量、算子、划分、配置、种子和环境。
+- GitHub 远程为 `git@github.com:yichen-w22/na_inputation.git`，用户已授权推送当前项目。`missing_analysis/**/hellinger*.npy` 为可重新生成的距离矩阵缓存，仅本地保存，已加入 `.gitignore`；不删除本地实验产物。
 - 数据或核心协议改变时另建版本；历史测试结果不得用于反复选择模型、超参数或变量。详细运行记录留在产物中，本文件仅维护摘要和链接。
 - 当前已有本地模型获取、训练、评估、可逆修复与内部论文整理的历史授权；它不表示所有后续研究方向已确定，也不包含外部发布或给他人发送消息。
 
@@ -152,3 +153,10 @@ V1 预设门控桥接相对线性宏 nRMSE 降低 4.69%，按日区间为 [3.12%
 - 统一查看入口：`missing_analysis/seven_units_v1/查看结果.html`；另有`类别数比较.csv`与`分析说明.txt`。105张SVG格式与107个索引链接均核验通过；GARD GT1六类的三种图形已作视觉检查。
 - `_data/manifest.json`、`verification.json`、各机组`audit.json`及`analysis.json`记录证据；`reproducibility.zip`同时保留实际拟合入口快照和可移植入口。缺少历史缓存时会正常重新扫描、拟合。
 - 后续掩码边界：GARD出现多个代表中位间隔约1秒的类别，不能仅将蓝色C1视为高频区；保留区需结合代表分布与真实参考有效性确定。本轮仅完成175个入选测点的记录间隔分析，未核实故障原因、保持值或全部259测点的物理值质量。
+
+## 11. GitHub 同步与大文件维护（2026-10-14）
+
+- 状态：进行中；本地历史修复已完成，待重新推送并核对远程提交。
+- 首次推送因 `missing_analysis/jqrd_gt1/runs/jqrd_gt1_daily_v1/hellinger_train.npy` 为 343,534,600 字节而被 GitHub 拒绝；远程无已有分支。本轮仅从两次原提交中移除该路径，保留提交内容与历史顺序，补充缓存忽略规则。
+- 修复前 573 个已跟踪文件的大小与 SHA-256 均核验不变，本地距离矩阵仍在原位置；清理后 `main` 可达历史最大文件为 2,218,395 字节。未修改原始数据或重新执行科研实验。
+- 原提交完整备份与核验记录位于仓库外 `C:/MyFolder/Projects/na_imputation_git_backup_20261014_113200/`：`original.bundle`、`before.json`、`after_cleanup.json`；备份不上传。原 HEAD 为 `d52f442a720a19b106ddf30a39f6647cf68d6078`，清理后历史 HEAD 为 `4229e5aaf51d544b624bf348a0ec5d5dee465238`。
