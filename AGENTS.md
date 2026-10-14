@@ -156,7 +156,7 @@ V1 预设门控桥接相对线性宏 nRMSE 降低 4.69%，按日区间为 [3.12%
 
 ## 11. GitHub 同步与大文件维护（2026-10-14）
 
-- 状态：进行中；本地历史修复已完成，待重新推送并核对远程提交。
+- 状态：已完成；已通过普通推送创建远程 `main`，配置 `origin/main` 上游，并通过 `git ls-remote` 核对远程提交与本地一致。
 - 首次推送因 `missing_analysis/jqrd_gt1/runs/jqrd_gt1_daily_v1/hellinger_train.npy` 为 343,534,600 字节而被 GitHub 拒绝；远程无已有分支。本轮仅从两次原提交中移除该路径，保留提交内容与历史顺序，补充缓存忽略规则。
 - 修复前 573 个已跟踪文件的大小与 SHA-256 均核验不变，本地距离矩阵仍在原位置；清理后 `main` 可达历史最大文件为 2,218,395 字节。未修改原始数据或重新执行科研实验。
 - 原提交完整备份与核验记录位于仓库外 `C:/MyFolder/Projects/na_imputation_git_backup_20261014_113200/`：`original.bundle`、`before.json`、`after_cleanup.json`；备份不上传。原 HEAD 为 `d52f442a720a19b106ddf30a39f6647cf68d6078`，清理后历史 HEAD 为 `4229e5aaf51d544b624bf348a0ec5d5dee465238`。
