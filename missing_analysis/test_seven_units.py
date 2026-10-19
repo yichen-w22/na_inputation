@@ -8,8 +8,7 @@ import numpy as np
 import pandas as pd
 import seven_units as m
 
-sys.modules.setdefault('daily_modes',m.core)
-from jqrd_gt1.test_daily_modes import ProtocolTests
+from test_daily_modes_core import ProtocolTests
 
 
 class MultiUnitTests(unittest.TestCase):

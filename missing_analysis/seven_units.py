@@ -24,7 +24,7 @@ from sklearn.metrics import adjusted_rand_score, silhouette_samples
 from threadpoolctl import threadpool_limits
 
 # Reuse the already validated numerical definitions; never call its old path-specific CLI.
-from jqrd_gt1 import daily_modes as core
+import daily_modes_core as core
 
 ROOT = Path(__file__).resolve().parents[1]
 HERE = Path(__file__).resolve().parent
@@ -538,6 +538,111 @@ def report_unit(out,unit):
     core.save_json(c/'analysis.json',summary)
 
 
+GATE_NAMES = dict(init_ari='初始化稳定性', block_ari='日期扰动中位数',
+                  block_ari_p10='日期扰动10%分位', class_jaccard='逐类一致性', silhouette='轮廓系数')
+
+def failed_gates(result):
+    return '、'.join(GATE_NAMES[key] for key, passed in result['gates'].items() if not passed)
+
+
+def write_unit_summary(out, unit, summary, models):
+    """Describe existing fits only; never fit/select a new model or change cached evidence."""
+    results = [summary['k_results'][str(k)] for k in PROTOCOL['k_values']]
+    recommended = summary['recommended_k']
+    confirmed = summary.get('confirmed_k')
+    best = max(results, key=lambda s: s['silhouette_mean'])
+    passed = [s['k'] for s in results if s['passes']]
+    eligible = [s for s in results if s['passes']]
+    expected = None
+    if eligible:
+        highest = max(s['silhouette_mean'] for s in eligible)
+        expected = min(s['k'] for s in eligible if s['silhouette_mean'] >= highest - PROTOCOL['thresholds']['silhouette_tolerance'])
+    assert recommended == expected, f'{unit}: stored recommendation disagrees with protocol'
+    assigned = summary['assigned_days']
+    title = f'{unit.upper()}：K=2—6 每日记录间隔分类效果总结'
+    parts = [f'全部候选中K={best["k"]}轮廓最高（{best["silhouette_mean"]:.4f}），'+
+             ('且通过全部门槛。' if best['passes'] else '但未通过'+failed_gates(best)+'，不能仅据轮廓采用。')]
+    if eligible:
+        peak = max(eligible, key=lambda s: s['silhouette_mean'])
+        robust = max(eligible, key=lambda s: s['block_ari_p10'])
+        parts.append(f'合格候选中K={peak["k"]}区分度最高；按0.02轮廓容差优先较少类别，规则推荐K={recommended}。')
+        parts.append(f'合格候选中K={robust["k"]}的日期扰动10%分位最高（{robust["block_ari_p10"]:.4f}），可作为重视日期稳定性时的对照。')
+    end = results[-1]
+    prev = results[-2]
+    parts.append(f'从K={prev["k"]}到K={end["k"]}，轮廓变化{end["silhouette_mean"]-prev["silhouette_mean"]:+.4f}；'
+                 +('末级细分通过全部门槛。' if end['passes'] else '末级细分未通过'+failed_gates(end)+'。'))
+    if confirmed:
+        parts.append(f'用户已确认采用K={confirmed}，保留该选择；规则推荐与人工采用分别列示。')
+    conclusion = ''.join(parts)
+    lines = [title, '=' * 66, '', '一、结论', conclusion,
+             f'通过全部门槛：{", ".join("K="+str(k) for k in passed) or "无"}。',
+             f'轮廓最高：K={best["k"]}（{best["silhouette_mean"]:.4f}）；规则推荐：'+(f'K={recommended}。' if recommended else '无合格方案。'),
+             f'人工采用：K={confirmed}。' if confirmed else '人工采用：尚未确认；规则推荐仅供比较，不自动切换主结果。',
+             '', '二、范围与判读',
+             f'{summary["start"]} 至 {summary["end"]}；{summary["sensors"]}测点；学习样本{summary["learning_days"]:,}个测点日，可分类{assigned:,}个测点日。',
+             '样本单位是“测点×自然日”，不是独立日数。每天将全部正记录间隔归一化为52箱概率，各测点日等权。',
+             '轮廓系数越大，类内相似与类间分离越好；平均Hellinger是学习样本到代表日的距离，越小越贴合。',
+             '初始化ARI衡量重复初始化一致性；日期ARI衡量共同7日块扰动的一致性；逐类Jaccard用于发现整体ARI掩盖的小类失稳。',
+             '门槛：初始化ARI中位≥0.90；日期ARI中位≥0.80、10%分位≥0.60；最弱类Jaccard中位≥0.60；轮廓>0。',
+             '推荐规则：先排除未通过者，再在距合格最高轮廓0.02以内选最小K。该规则不等于已证明最优类别数。',
+             '', '三、K=2—6 指标对比',
+             'K | 轮廓↑ | 平均Hellinger↓ | 初始化ARI中位/10%分位↑ | 日期ARI中位/10%分位↑ | 最弱类Jaccard↑ | 门槛']
+    for s in results:
+        verdict = '通过' if s['passes'] else '未通过：' + failed_gates(s)
+        lines.append(f'{s["k"]} | {s["silhouette_mean"]:.4f} | {s["mean_hellinger"]:.4f} | '
+                     f'{s["init_ari_median"]:.4f}/{s["init_ari_p10"]:.4f} | {s["block_ari_median"]:.4f}/{s["block_ari_p10"]:.4f} | '
+                     f'{s["min_class_jaccard_median"]:.4f} | {verdict}')
+    lines += ['', 'K | 稳定测点日 | 不稳定测点日 | 证据不足测点日 | 全部相邻日对 | 全部自转移 | 稳定相邻日对 | 稳定自转移']
+    for s in results:
+        k = s['k']
+        stability = models[f'k{k}_stability']
+        counts = [int((stability == state).sum()) for state in [2, 1, 0]]
+        assert sum(counts) == assigned
+        assert counts[1] == s['unstable_days'] and counts[2] == s['insufficient_evidence_days']
+        pairs = [models[f'k{k}_{scope}_transitions'] for scope in ['all', 'stable']]
+        ratios = [f'{np.trace(m)/m.sum():.2%}' if m.sum() else '无有效日对' for m in pairs]
+        lines.append(f'{k} | ' + ' | '.join(f'{c:,}（{c/assigned:.1%}）' for c in counts) +
+                     f' | {pairs[0].sum():,} | {ratios[0]} | {pairs[1].sum():,} | {ratios[1]}')
+    lines += ['证据不足指日期扰动检查次数少于3，不表示原始记录一定无效。稳定子集随K改变，不能把不同分母的自转移比例直接当作优劣排名。',
+              '自转移表示相邻日标签持续性；类别更粗通常更容易自转移，不能仅凭高自转移认定分类更好。',
+              '', '四、逐K效果与类别构成']
+    previous = None
+    for s in results:
+        k = s['k']
+        lines += ['', f'K={k}：'+('全部门槛通过。' if s['passes'] else '未通过：'+failed_gates(s)+'。')]
+        if previous:
+            delta = s['silhouette_mean'] - previous['silhouette_mean']
+            reduction = previous['mean_hellinger'] - s['mean_hellinger']
+            lines.append(f'相对K={previous["k"]}，轮廓变化{delta:+.4f}；代表距离减少{reduction:.4f}。各K独立拟合，类别编号不沿用，也不保证逐级拆分。')
+        else:
+            lines.append('作为最粗的两类参照，先观察是否混合了不同记录间隔模式，再结合稳定性判断可用性。')
+        assert sum(c['assigned_days'] for c in s['classes']) == assigned
+        for c in s['classes']:
+            cid = c['cluster']
+            lab = models[f'k{k}_labels']
+            assert int((lab == cid - 1).sum()) == c['assigned_days']
+            lines.append(f'  C{cid}：{c["assigned_days"]:,}测点日（{c["assigned_days"]/assigned:.1%}），覆盖{c["sensor_count"]}测点/{c["distinct_dates"]}日期；'
+                         f'代表中位间隔箱{core.bin_description(c["median_bin"])}；类轮廓{c["silhouette_mean"]:.3f}，Jaccard中位{c["jaccard_median"]:.3f}。')
+        weakest = min(s['classes'], key=lambda c: c['silhouette_mean'])
+        lines.append(f'最难分离的是C{weakest["cluster"]}（类轮廓{weakest["silhouette_mean"]:.3f}）；可优先回看代表分布中的类内10%—90%范围。')
+        sensors = s['temporal']['sensors']
+        persistent = sum(r['self_transition'] is not None and r['null_p975'][0] is not None and r['self_transition'] > r['null_p975'][0] for r in sensors)
+        lines.append(f'{persistent}/{summary["sensors"]}测点的自转移高于各自500次标签打乱的97.5%分位，仅表明标签存在时间持续性；不是分类准确率。')
+        previous = s
+    lines += ['', '五、三张图的用途与边界',
+              '每个k2—k6目录仅有：class_timeline.svg（何时出现何种模式）、representative_distributions.svg（各类真实代表日与类内范围）、transition_matrices.svg（全部/仅稳定日期转移）。',
+              '同机组不同K、不同机组之间的同色同编号均不表示同一分布。代表中位间隔落在1秒附近也不保证物理高频真值，需查看完整分布与原始值质量。',
+              '该分析评价记录间隔分组的区分度和内部稳定性，无外部真值标签；不等同故障类型、数据质量等级或填补精度。打乱对照未做多重比较校正。',
+              '', '六、来源与复现',
+              f'数值：../_data/{unit}/analysis.json、models.npz、daily.csv、daily.npz；协议：../_data/manifest.json。',
+              '生成入口：missing_analysis/seven_units.py summary（仅汇总）；report（重绘三图并汇总）。',
+              f'本次总结日期：{pd.Timestamp.now(tz="Asia/Shanghai").date()}（Asia/Shanghai）。汇总既有模型与标签，不在此步骤重拟合或改变人工选择。']
+    path = out/unit/'分类效果总结.txt'
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text('\n'.join(lines)+'\n', encoding='utf-8')
+    return conclusion
+
+
 def summarize(out):
     rows=[];sections=[];text=[]
     manifest=core.read_json(out/'_data'/'manifest.json')
@@ -555,10 +660,15 @@ def summarize(out):
         title=f'{unit.upper()} — {summary["sensors"]}测点；规则推荐K={recommended if recommended else "无合格方案"}'
         if summary['confirmed_k']:
             title+=f'；人工确认K={summary["confirmed_k"]}'
+        with np.load(c/'models.npz') as models:
+            conclusion=write_unit_summary(out,unit,summary,models)
         body=[f'<section><h2>{html.escape(title)}</h2>',
+              f'<p><a href="{unit}/分类效果总结.txt">查看本机组K=2—6分类效果总结</a></p><p>{html.escape(conclusion)}</p>',
               f'<p>{summary["start"]} 至 {summary["end"]}；学习日分布 {summary["learning_days"]:,}；可分类日 {summary["assigned_days"]:,}。</p>',
               '<table><tr><th>K</th><th>轮廓系数</th><th>日期扰动ARI<br>中位数 / 10%分位</th><th>全部门槛</th><th>查看三张图</th></tr>']
         text.append(title)
+        text.append('  '+conclusion)
+        text.append(f'  本机组完整总结：{unit}/分类效果总结.txt')
         text.append(f'  完整来源行数 {audit["rows"]:,}；日期 {summary["start"]} 至 {summary["end"]}；学习日 {summary["learning_days"]}。')
         text.append('  日期状态：'+json.dumps(summary['status_counts'],ensure_ascii=False))
         for k in PROTOCOL['k_values']:
@@ -580,15 +690,7 @@ def summarize(out):
                         f'p10={s["block_ari_p10"]:.4f}, all_gates={s["passes"]}。')
             if failed:
                 text.append('    未通过：'+failed)
-        five=summary['k_results']['5']
-        models=np.load(c/'models.npz')
-        count=models['k5_all_transitions']
-        self_ratio=np.trace(count)/count.sum() if count.sum() else np.nan
-        five_null=five['temporal']['sensors']
-        persistent=sum(s['self_transition'] is not None and s['null_p975'][0] is not None and s['self_transition']>s['null_p975'][0] for s in five_null)
-        description=f'K=5自转移比例 {self_ratio:.2%}；{persistent}/{summary["sensors"]}测点高于各自打乱对照97.5%分位数。'
-        text.append('  '+description)
-        body.append('</table><p>'+description+'</p></section>')
+        body.append('</table></section>')
         sections.append('\n'.join(body))
     core.csv(out/'类别数比较.csv',rows)
     intro=['七台燃机每日记录间隔分析',
@@ -665,7 +767,7 @@ def verify_outputs(out):
 
 
 def bundle_code(out):
-    files=[Path(__file__),Path(core.__file__),HERE/'test_seven_units.py',HERE/'jqrd_gt1'/'test_daily_modes.py']
+    files=[Path(__file__),Path(core.__file__),HERE/'test_seven_units.py',HERE/'test_daily_modes_core.py']
     archive=out/'_data'/'reproducibility.zip'
     history={}
     original_hash=None
@@ -682,6 +784,7 @@ def bundle_code(out):
     previous=core.read_json(versions_path) if versions_path.exists() else {}
     fitting_hash=previous.get('executed_fitting_entry_sha256',original_hash or core.digest(Path(__file__)))
     with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED) as z:
+        history.setdefault(f'executed/daily_modes_{core.digest(Path(core.__file__))[:12]}.py',Path(core.__file__).read_bytes())
         for name,content in history.items():
             z.writestr(name,content)
         for p in files:
@@ -696,11 +799,16 @@ def bundle_code(out):
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('command',choices=['all','prepare','evaluate','report','verify'])
+    parser.add_argument('command',choices=['all','prepare','evaluate','report','summary','verify'])
     parser.add_argument('--output',type=Path,default=DEFAULT_OUT)
     parser.add_argument('--workers',type=int,default=3)
     args=parser.parse_args()
     out=args.output.resolve()
+    if args.command=='summary':
+        bundle_code(out)
+        summarize(out)
+        print(f'summary complete: {out}',flush=True)
+        return
     manifest=inventory_run(out)
     bundle_code(out)
     workers=max(1,min(args.workers,3))

@@ -1,3 +1,0 @@
-﻿cluster,training_days,assigned_days,distinct_dates,sensor_count,silhouette_mean,block_jaccard_median,block_jaccard_p10,missing_check_repetitions,medoid_sample_id,medoid_sensor,medoid_date,median_bin
-1,1746,1748,287,19,0.6595807191951822,1.0,0.9933504273504273,0,2722,JQRD_11MBA12CT901ZQ01,2024-07-21,21
-2,4807,4851,306,23,0.2658152906872232,1.0,0.9973405593450588,0,1677,JQRD_11MBL11CT001XQ01,2024-06-08,43

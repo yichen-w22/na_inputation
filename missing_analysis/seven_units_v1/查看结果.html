@@ -2,6 +2,7 @@
 <style>body{font:16px/1.7 "Microsoft YaHei",sans-serif;max-width:1180px;margin:40px auto;padding:0 24px;background:#f6f8fa;color:#152536}h1{font-size:29px}h2{font-size:21px}section{background:white;padding:18px 24px;margin:24px 0;border-radius:10px}table{border-collapse:collapse;width:100%}th,td{padding:9px 12px;border-bottom:1px solid #ddd;text-align:left}a{color:#126bb5}p{color:#475569}</style>
 <h1>七台燃机每日记录间隔分析</h1><p>每行提供三张SVG。按机组分别聚类，跨机组的同色类别不能直接等同；蓝色也不自动代表高质量真值。图中参数顺序沿用各自选取点表。</p>
 <p><a href="类别数比较.csv">下载类别数比较</a> · <a href="分析说明.txt">查看分析说明</a></p><section><h2>GARD_GT1 — 30测点；规则推荐K=6</h2>
+<p><a href="gard_gt1/分类效果总结.txt">查看本机组K=2—6分类效果总结</a></p><p>全部候选中K=2轮廓最高（0.7389），但未通过日期扰动10%分位，不能仅据轮廓采用。合格候选中K=6区分度最高；按0.02轮廓容差优先较少类别，规则推荐K=6。合格候选中K=3的日期扰动10%分位最高（0.9984），可作为重视日期稳定性时的对照。从K=5到K=6，轮廓变化+0.0012；末级细分通过全部门槛。</p>
 <p>2024-06-01 至 2025-04-30；学习日分布 9,921；可分类日 9,981。</p>
 <table><tr><th>K</th><th>轮廓系数</th><th>日期扰动ARI<br>中位数 / 10%分位</th><th>全部门槛</th><th>查看三张图</th></tr>
 <tr><td>2</td><td>0.7389</td><td>1.0000 / -0.0449</td><td>未通过：日期扰动10%分位</td><td><a target="_blank" href="gard_gt1/k2/class_timeline.svg">时间条带</a> · <a target="_blank" href="gard_gt1/k2/representative_distributions.svg">代表分布</a> · <a target="_blank" href="gard_gt1/k2/transition_matrices.svg">转移矩阵</a></td></tr>
@@ -9,8 +10,9 @@
 <tr><td>4</td><td>0.6847</td><td>0.9926 / 0.9804</td><td>通过</td><td><a target="_blank" href="gard_gt1/k4/class_timeline.svg">时间条带</a> · <a target="_blank" href="gard_gt1/k4/representative_distributions.svg">代表分布</a> · <a target="_blank" href="gard_gt1/k4/transition_matrices.svg">转移矩阵</a></td></tr>
 <tr><td>5</td><td>0.7285</td><td>0.8750 / 0.7711</td><td>未通过：逐类一致性</td><td><a target="_blank" href="gard_gt1/k5/class_timeline.svg">时间条带</a> · <a target="_blank" href="gard_gt1/k5/representative_distributions.svg">代表分布</a> · <a target="_blank" href="gard_gt1/k5/transition_matrices.svg">转移矩阵</a></td></tr>
 <tr><td>6</td><td>0.7297</td><td>0.9392 / 0.7703</td><td>通过</td><td><a target="_blank" href="gard_gt1/k6/class_timeline.svg">时间条带</a> · <a target="_blank" href="gard_gt1/k6/representative_distributions.svg">代表分布</a> · <a target="_blank" href="gard_gt1/k6/transition_matrices.svg">转移矩阵</a></td></tr>
-</table><p>K=5自转移比例 97.47%；30/30测点高于各自打乱对照97.5%分位数。</p></section>
+</table></section>
 <section><h2>GARD_GT2 — 30测点；规则推荐K=4</h2>
+<p><a href="gard_gt2/分类效果总结.txt">查看本机组K=2—6分类效果总结</a></p><p>全部候选中K=6轮廓最高（0.7642），且通过全部门槛。合格候选中K=6区分度最高；按0.02轮廓容差优先较少类别，规则推荐K=4。合格候选中K=4的日期扰动10%分位最高（0.9998），可作为重视日期稳定性时的对照。从K=5到K=6，轮廓变化+0.0033；末级细分通过全部门槛。</p>
 <p>2024-06-01 至 2025-04-30；学习日分布 9,921；可分类日 9,981。</p>
 <table><tr><th>K</th><th>轮廓系数</th><th>日期扰动ARI<br>中位数 / 10%分位</th><th>全部门槛</th><th>查看三张图</th></tr>
 <tr><td>2</td><td>0.3667</td><td>0.4221 / 0.0031</td><td>未通过：日期扰动中位数、日期扰动10%分位、逐类一致性</td><td><a target="_blank" href="gard_gt2/k2/class_timeline.svg">时间条带</a> · <a target="_blank" href="gard_gt2/k2/representative_distributions.svg">代表分布</a> · <a target="_blank" href="gard_gt2/k2/transition_matrices.svg">转移矩阵</a></td></tr>
@@ -18,8 +20,9 @@
 <tr><td>4</td><td>0.7540</td><td>1.0000 / 0.9998</td><td>通过</td><td><a target="_blank" href="gard_gt2/k4/class_timeline.svg">时间条带</a> · <a target="_blank" href="gard_gt2/k4/representative_distributions.svg">代表分布</a> · <a target="_blank" href="gard_gt2/k4/transition_matrices.svg">转移矩阵</a></td></tr>
 <tr><td>5</td><td>0.7608</td><td>0.9972 / 0.9743</td><td>通过</td><td><a target="_blank" href="gard_gt2/k5/class_timeline.svg">时间条带</a> · <a target="_blank" href="gard_gt2/k5/representative_distributions.svg">代表分布</a> · <a target="_blank" href="gard_gt2/k5/transition_matrices.svg">转移矩阵</a></td></tr>
 <tr><td>6</td><td>0.7642</td><td>0.9998 / 0.9981</td><td>通过</td><td><a target="_blank" href="gard_gt2/k6/class_timeline.svg">时间条带</a> · <a target="_blank" href="gard_gt2/k6/representative_distributions.svg">代表分布</a> · <a target="_blank" href="gard_gt2/k6/transition_matrices.svg">转移矩阵</a></td></tr>
-</table><p>K=5自转移比例 97.02%；30/30测点高于各自打乱对照97.5%分位数。</p></section>
+</table></section>
 <section><h2>JQRD_GT1 — 23测点；规则推荐K=3；人工确认K=5</h2>
+<p><a href="jqrd_gt1/分类效果总结.txt">查看本机组K=2—6分类效果总结</a></p><p>全部候选中K=5轮廓最高（0.3955），且通过全部门槛。合格候选中K=5区分度最高；按0.02轮廓容差优先较少类别，规则推荐K=3。合格候选中K=2的日期扰动10%分位最高（0.9930），可作为重视日期稳定性时的对照。从K=5到K=6，轮廓变化-0.0119；末级细分通过全部门槛。用户已确认采用K=5，保留该选择；规则推荐与人工采用分别列示。</p>
 <p>2024-06-01 至 2025-04-30；学习日分布 6,553；可分类日 6,599。</p>
 <table><tr><th>K</th><th>轮廓系数</th><th>日期扰动ARI<br>中位数 / 10%分位</th><th>全部门槛</th><th>查看三张图</th></tr>
 <tr><td>2</td><td>0.3707</td><td>1.0000 / 0.9930</td><td>通过</td><td><a target="_blank" href="jqrd_gt1/k2/class_timeline.svg">时间条带</a> · <a target="_blank" href="jqrd_gt1/k2/representative_distributions.svg">代表分布</a> · <a target="_blank" href="jqrd_gt1/k2/transition_matrices.svg">转移矩阵</a></td></tr>
@@ -27,8 +30,9 @@
 <tr><td>4</td><td>0.3834</td><td>0.8714 / 0.6982</td><td>未通过：初始化稳定性</td><td><a target="_blank" href="jqrd_gt1/k4/class_timeline.svg">时间条带</a> · <a target="_blank" href="jqrd_gt1/k4/representative_distributions.svg">代表分布</a> · <a target="_blank" href="jqrd_gt1/k4/transition_matrices.svg">转移矩阵</a></td></tr>
 <tr><td>5</td><td>0.3955</td><td>0.9827 / 0.9482</td><td>通过</td><td><a target="_blank" href="jqrd_gt1/k5/class_timeline.svg">时间条带</a> · <a target="_blank" href="jqrd_gt1/k5/representative_distributions.svg">代表分布</a> · <a target="_blank" href="jqrd_gt1/k5/transition_matrices.svg">转移矩阵</a></td></tr>
 <tr><td>6</td><td>0.3835</td><td>0.9636 / 0.8542</td><td>通过</td><td><a target="_blank" href="jqrd_gt1/k6/class_timeline.svg">时间条带</a> · <a target="_blank" href="jqrd_gt1/k6/representative_distributions.svg">代表分布</a> · <a target="_blank" href="jqrd_gt1/k6/transition_matrices.svg">转移矩阵</a></td></tr>
-</table><p>K=5自转移比例 91.82%；23/23测点高于各自打乱对照97.5%分位数。</p></section>
+</table></section>
 <section><h2>JQRD_GT2 — 23测点；规则推荐K=3</h2>
+<p><a href="jqrd_gt2/分类效果总结.txt">查看本机组K=2—6分类效果总结</a></p><p>全部候选中K=5轮廓最高（0.4660），且通过全部门槛。合格候选中K=5区分度最高；按0.02轮廓容差优先较少类别，规则推荐K=3。合格候选中K=2的日期扰动10%分位最高（0.9824），可作为重视日期稳定性时的对照。从K=5到K=6，轮廓变化-0.0092；末级细分通过全部门槛。</p>
 <p>2024-06-01 至 2025-04-30；学习日分布 6,314；可分类日 6,360。</p>
 <table><tr><th>K</th><th>轮廓系数</th><th>日期扰动ARI<br>中位数 / 10%分位</th><th>全部门槛</th><th>查看三张图</th></tr>
 <tr><td>2</td><td>0.4136</td><td>1.0000 / 0.9824</td><td>通过</td><td><a target="_blank" href="jqrd_gt2/k2/class_timeline.svg">时间条带</a> · <a target="_blank" href="jqrd_gt2/k2/representative_distributions.svg">代表分布</a> · <a target="_blank" href="jqrd_gt2/k2/transition_matrices.svg">转移矩阵</a></td></tr>
@@ -36,8 +40,9 @@
 <tr><td>4</td><td>0.4506</td><td>0.9656 / 0.8376</td><td>通过</td><td><a target="_blank" href="jqrd_gt2/k4/class_timeline.svg">时间条带</a> · <a target="_blank" href="jqrd_gt2/k4/representative_distributions.svg">代表分布</a> · <a target="_blank" href="jqrd_gt2/k4/transition_matrices.svg">转移矩阵</a></td></tr>
 <tr><td>5</td><td>0.4660</td><td>0.9883 / 0.9462</td><td>通过</td><td><a target="_blank" href="jqrd_gt2/k5/class_timeline.svg">时间条带</a> · <a target="_blank" href="jqrd_gt2/k5/representative_distributions.svg">代表分布</a> · <a target="_blank" href="jqrd_gt2/k5/transition_matrices.svg">转移矩阵</a></td></tr>
 <tr><td>6</td><td>0.4567</td><td>0.9919 / 0.7173</td><td>通过</td><td><a target="_blank" href="jqrd_gt2/k6/class_timeline.svg">时间条带</a> · <a target="_blank" href="jqrd_gt2/k6/representative_distributions.svg">代表分布</a> · <a target="_blank" href="jqrd_gt2/k6/transition_matrices.svg">转移矩阵</a></td></tr>
-</table><p>K=5自转移比例 92.33%；23/23测点高于各自打乱对照97.5%分位数。</p></section>
+</table></section>
 <section><h2>JXRD_GT1 — 23测点；规则推荐K=6</h2>
+<p><a href="jxrd_gt1/分类效果总结.txt">查看本机组K=2—6分类效果总结</a></p><p>全部候选中K=6轮廓最高（0.4191），且通过全部门槛。合格候选中K=6区分度最高；按0.02轮廓容差优先较少类别，规则推荐K=6。合格候选中K=4的日期扰动10%分位最高（0.9491），可作为重视日期稳定性时的对照。从K=5到K=6，轮廓变化+0.0286；末级细分通过全部门槛。</p>
 <p>2024-06-01 至 2025-04-30；学习日分布 7,575；可分类日 7,621。</p>
 <table><tr><th>K</th><th>轮廓系数</th><th>日期扰动ARI<br>中位数 / 10%分位</th><th>全部门槛</th><th>查看三张图</th></tr>
 <tr><td>2</td><td>0.3459</td><td>0.9139 / 0.8172</td><td>未通过：初始化稳定性</td><td><a target="_blank" href="jxrd_gt1/k2/class_timeline.svg">时间条带</a> · <a target="_blank" href="jxrd_gt1/k2/representative_distributions.svg">代表分布</a> · <a target="_blank" href="jxrd_gt1/k2/transition_matrices.svg">转移矩阵</a></td></tr>
@@ -45,8 +50,9 @@
 <tr><td>4</td><td>0.3722</td><td>0.9731 / 0.9491</td><td>通过</td><td><a target="_blank" href="jxrd_gt1/k4/class_timeline.svg">时间条带</a> · <a target="_blank" href="jxrd_gt1/k4/representative_distributions.svg">代表分布</a> · <a target="_blank" href="jxrd_gt1/k4/transition_matrices.svg">转移矩阵</a></td></tr>
 <tr><td>5</td><td>0.3905</td><td>0.9683 / 0.9079</td><td>通过</td><td><a target="_blank" href="jxrd_gt1/k5/class_timeline.svg">时间条带</a> · <a target="_blank" href="jxrd_gt1/k5/representative_distributions.svg">代表分布</a> · <a target="_blank" href="jxrd_gt1/k5/transition_matrices.svg">转移矩阵</a></td></tr>
 <tr><td>6</td><td>0.4191</td><td>0.9609 / 0.7910</td><td>通过</td><td><a target="_blank" href="jxrd_gt1/k6/class_timeline.svg">时间条带</a> · <a target="_blank" href="jxrd_gt1/k6/representative_distributions.svg">代表分布</a> · <a target="_blank" href="jxrd_gt1/k6/transition_matrices.svg">转移矩阵</a></td></tr>
-</table><p>K=5自转移比例 83.90%；23/23测点高于各自打乱对照97.5%分位数。</p></section>
+</table></section>
 <section><h2>JXRD_GT2 — 23测点；规则推荐K=3</h2>
+<p><a href="jxrd_gt2/分类效果总结.txt">查看本机组K=2—6分类效果总结</a></p><p>全部候选中K=5轮廓最高（0.3869），但未通过逐类一致性，不能仅据轮廓采用。合格候选中K=3区分度最高；按0.02轮廓容差优先较少类别，规则推荐K=3。合格候选中K=3的日期扰动10%分位最高（0.9690），可作为重视日期稳定性时的对照。从K=5到K=6，轮廓变化-0.0264；末级细分未通过初始化稳定性、日期扰动中位数、逐类一致性。</p>
 <p>2024-06-01 至 2025-04-30；学习日分布 7,579；可分类日 7,625。</p>
 <table><tr><th>K</th><th>轮廓系数</th><th>日期扰动ARI<br>中位数 / 10%分位</th><th>全部门槛</th><th>查看三张图</th></tr>
 <tr><td>2</td><td>0.2536</td><td>0.9927 / -0.0816</td><td>未通过：日期扰动10%分位</td><td><a target="_blank" href="jxrd_gt2/k2/class_timeline.svg">时间条带</a> · <a target="_blank" href="jxrd_gt2/k2/representative_distributions.svg">代表分布</a> · <a target="_blank" href="jxrd_gt2/k2/transition_matrices.svg">转移矩阵</a></td></tr>
@@ -54,8 +60,9 @@
 <tr><td>4</td><td>0.3795</td><td>0.9692 / 0.9474</td><td>通过</td><td><a target="_blank" href="jxrd_gt2/k4/class_timeline.svg">时间条带</a> · <a target="_blank" href="jxrd_gt2/k4/representative_distributions.svg">代表分布</a> · <a target="_blank" href="jxrd_gt2/k4/transition_matrices.svg">转移矩阵</a></td></tr>
 <tr><td>5</td><td>0.3869</td><td>0.9248 / 0.8335</td><td>未通过：逐类一致性</td><td><a target="_blank" href="jxrd_gt2/k5/class_timeline.svg">时间条带</a> · <a target="_blank" href="jxrd_gt2/k5/representative_distributions.svg">代表分布</a> · <a target="_blank" href="jxrd_gt2/k5/transition_matrices.svg">转移矩阵</a></td></tr>
 <tr><td>6</td><td>0.3605</td><td>0.7178 / 0.6398</td><td>未通过：初始化稳定性、日期扰动中位数、逐类一致性</td><td><a target="_blank" href="jxrd_gt2/k6/class_timeline.svg">时间条带</a> · <a target="_blank" href="jxrd_gt2/k6/representative_distributions.svg">代表分布</a> · <a target="_blank" href="jxrd_gt2/k6/transition_matrices.svg">转移矩阵</a></td></tr>
-</table><p>K=5自转移比例 87.14%；23/23测点高于各自打乱对照97.5%分位数。</p></section>
+</table></section>
 <section><h2>JXRD_GT3 — 23测点；规则推荐K=4</h2>
+<p><a href="jxrd_gt3/分类效果总结.txt">查看本机组K=2—6分类效果总结</a></p><p>全部候选中K=6轮廓最高（0.5127），但未通过初始化稳定性、逐类一致性，不能仅据轮廓采用。合格候选中K=4区分度最高；按0.02轮廓容差优先较少类别，规则推荐K=4。合格候选中K=4的日期扰动10%分位最高（0.9939），可作为重视日期稳定性时的对照。从K=5到K=6，轮廓变化+0.0216；末级细分未通过初始化稳定性、逐类一致性。</p>
 <p>2024-06-01 至 2025-04-30；学习日分布 7,636；可分类日 7,682。</p>
 <table><tr><th>K</th><th>轮廓系数</th><th>日期扰动ARI<br>中位数 / 10%分位</th><th>全部门槛</th><th>查看三张图</th></tr>
 <tr><td>2</td><td>0.3687</td><td>1.0000 / 0.9757</td><td>通过</td><td><a target="_blank" href="jxrd_gt3/k2/class_timeline.svg">时间条带</a> · <a target="_blank" href="jxrd_gt3/k2/representative_distributions.svg">代表分布</a> · <a target="_blank" href="jxrd_gt3/k2/transition_matrices.svg">转移矩阵</a></td></tr>
@@ -63,4 +70,4 @@
 <tr><td>4</td><td>0.4889</td><td>1.0000 / 0.9939</td><td>通过</td><td><a target="_blank" href="jxrd_gt3/k4/class_timeline.svg">时间条带</a> · <a target="_blank" href="jxrd_gt3/k4/representative_distributions.svg">代表分布</a> · <a target="_blank" href="jxrd_gt3/k4/transition_matrices.svg">转移矩阵</a></td></tr>
 <tr><td>5</td><td>0.4911</td><td>0.9739 / 0.7840</td><td>未通过：初始化稳定性</td><td><a target="_blank" href="jxrd_gt3/k5/class_timeline.svg">时间条带</a> · <a target="_blank" href="jxrd_gt3/k5/representative_distributions.svg">代表分布</a> · <a target="_blank" href="jxrd_gt3/k5/transition_matrices.svg">转移矩阵</a></td></tr>
 <tr><td>6</td><td>0.5127</td><td>0.9039 / 0.7045</td><td>未通过：初始化稳定性、逐类一致性</td><td><a target="_blank" href="jxrd_gt3/k6/class_timeline.svg">时间条带</a> · <a target="_blank" href="jxrd_gt3/k6/representative_distributions.svg">代表分布</a> · <a target="_blank" href="jxrd_gt3/k6/transition_matrices.svg">转移矩阵</a></td></tr>
-</table><p>K=5自转移比例 91.43%；23/23测点高于各自打乱对照97.5%分位数。</p></section></html>
+</table></section></html>

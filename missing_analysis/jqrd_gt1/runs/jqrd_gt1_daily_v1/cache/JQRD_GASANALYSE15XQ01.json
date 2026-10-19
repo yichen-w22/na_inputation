@@ -1,9 +1,0 @@
-{
-  "rows": 50537,
-  "invalid_values": 0,
-  "duplicate_valid_timestamps": 0,
-  "positive_intervals": 50536,
-  "first_ns": 1717200280315000000,
-  "last_ns": 1746056821629000000,
-  "unclosed_last_valid_ns": 1746056821629000000
-}
