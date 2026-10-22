@@ -1,5 +1,6 @@
 raw_data/
-experiment_data/
+experiment_data/*
+!experiment_data/*.py
 experiments/.venv/
 experiments/.venv_tsfm/
 experiments/foundation_assets/
